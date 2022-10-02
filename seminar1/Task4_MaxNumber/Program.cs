@@ -3,7 +3,7 @@
 и выдаёт максимальное из этих чисел.
 
 Автор: Трофимов П.А.
-
+https://github.com/Trofpa/Homework/tree/main/seminar1/Task4_MaxNumber
 */
 
 
