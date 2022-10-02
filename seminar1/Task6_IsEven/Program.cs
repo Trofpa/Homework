@@ -3,29 +3,50 @@
 является ли число чётным (делится ли оно на два без остатка)
 
 Автор: Трофимов П.А.
-
+https://github.com/Trofpa/Homework/tree/main/seminar1/Task6_IsEven
 */
 
-Console.Clear();
 
-int Number;
+//Методы:
 
-Console.WriteLine("Введите число: "); // Вводим число
-bool IsNumber = int.TryParse(Console.ReadLine(), out Number);
-
-
-if (IsNumber) // Проверка на то, что были введены числа
+//Ввод чисел
+int InputNumbers(string text)
 {
-    if (Number % 2 == 0)
+    bool Condition = true;
+    int number = 0;
+    while (Condition)
     {
-        Console.WriteLine(Number + " - четное число!");
+        Console.Write(text);
+        if (int.TryParse(Console.ReadLine(), out number))
+        {
+            Condition = false;
+        }
+        else
+        {
+            Console.WriteLine("Введенный символ не является числом!");
+        }
+    }
+return number;
+}
+//Проверка четности
+void IsEven(int number)
+{
+    if (number % 2 == 0)
+    {
+        Console.WriteLine($"{number} - четное число!");
     }
     else
     {
-        Console.WriteLine(Number + " - нечетное число!");
+        Console.WriteLine($"{number} - нечетное число!");
     }
 }
-else
-{
-    Console.WriteLine("Введенный символ не является числом!");
-}
+
+
+//Программа
+Console.Clear();
+int UsersNumber = InputNumbers("Введите целое число: ");
+IsEven(UsersNumber);
+
+
+
+
