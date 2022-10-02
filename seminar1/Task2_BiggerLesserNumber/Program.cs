@@ -4,34 +4,51 @@
 
 Автор: Трофимов П.А.
 */
-Console.Clear();
 
-int FirstNumber;
-int SecondNumber;
-Console.WriteLine("Введите первое число: "); // Вводим числа
-bool Condition1 = int.TryParse(Console.ReadLine(), out FirstNumber);
-Console.WriteLine("Введите второе число: ");
-bool Condition2 = int.TryParse(Console.ReadLine(), out SecondNumber);
-
-if (Condition1 && Condition2) // Проверка на то, что были введены числа
+//Методы:
+//Ввод чисел
+int InputNumbers(string text)
 {
-    if(FirstNumber > SecondNumber) // Сравниваем введенные числа
+    bool Condition = true;
+    int number = 0;
+    while (Condition)
     {
-        Console.WriteLine("Большее число: " + FirstNumber + "\nМеньшее число: " + SecondNumber);
-    }
-    else 
-    {
-        if (FirstNumber == SecondNumber)
+        Console.Write(text);
+        if (int.TryParse(Console.ReadLine(), out number))
         {
-        Console.WriteLine("\nВведенные числа равны!"); // Проверка на равенство введенных чисел
+            Condition = false;
         }
         else
         {
-        Console.WriteLine("\nБольшее число: " + SecondNumber + "\nМеньшее число: " + FirstNumber);
+            Console.WriteLine("Введенный символ не является числом!");
+        }
+    }
+return number;
+}
+
+//Сравнение двух введенных чисел
+void Comparing(int a, int b)
+{
+    if(a > b) // Сравниваем введенные числа
+    {
+        Console.WriteLine($"Большее число: {a}\nМеньшее число: {b}");
+    }
+    else 
+    {
+        if (a == b)
+        {
+            Console.WriteLine("Введенные числа равны!");
+        }
+        else
+        {
+            Console.Write($"Большее число: {b}\nМеньшее число: {a}");;
         }
     }
 }
-else
-{
-    Console.WriteLine("Одно или оба введенных символа не являлись числом!");
-}
+ 
+
+//Программа
+Console.Clear();
+int FirstNumber = InputNumbers("Введите первое число: ");
+int SecondNumber = InputNumbers("Введите второе число: ");
+Comparing(FirstNumber, SecondNumber);
