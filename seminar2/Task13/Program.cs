@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿/*
+13. Напишите метод, который выводит третью цифру заданного
+числа или сообщает, что третьей цифры нет.
+
+Автор: Трофимов П.А.
+
+*/

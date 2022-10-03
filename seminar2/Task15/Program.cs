@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿/*
+15. Напишите метод, который принимает на вход цифру,
+обозначающую день недели, и проверяет, является ли этот день выходным.
+
+Автор: Трофимов П.А.
+
+*/

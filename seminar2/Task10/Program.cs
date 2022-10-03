@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿/*
+10. Напишите метод, который принимает на вход трёхзначное число
+и на выходе показывает вторую цифру этого числа.
+
+
+Автор: Трофимов П.А.
+
+*/
