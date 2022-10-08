@@ -34,6 +34,11 @@ return number;
 //Вывод третьей цифры
 void ThirdDigit(int number)
 {
+    if (number < 0)
+    {
+        number = number * (-1);
+    }
+    
     if (number % 100 == number)
     {
         Console.WriteLine($"В числе {number} нет третьей цифры");
