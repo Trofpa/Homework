@@ -16,34 +16,23 @@
 
 Ответ : 4-5, 11-13
 
-1. Метод - проверяем каждый час, ведем счетчик людей,
-на выходе получаем массив с кол-вом людей [0, 23] - индекс == час.
-
-2. Метод - определяем максимальные значения в массиве. Если внутри 
-есть несколько max подряд - как то отформатировать это в ответе.
-
-Подсказка: используй методы .Split() и .Substring() чтобы работать с форматами!
-
 Автор: Трофимов П.А.
 */
 
-/*
-int[] PeopleHour(string[] str)
-{
-    string [] strlist = new string[str.Length];
-    for (int i = 0; i < str.Length; i++)
-    {
-        strlist[i] = str[i].Split("-");
-    }
-}
 
-*/
+//Методы
 
+//Создание списка посещения
 string[] GenList()
 {
+    //Вводим количество строк
     Console.WriteLine("Создаем лист посещения."
     + "\nВведите количество строк в списке: \n");
     int size = int.Parse(Console.ReadLine());
+
+    //Генерируем строковый массив с периодами времени.
+    //Если значение начала посещения выпало 23, 
+    //то уход записывается как 0, так как учитываем сутки 
     string[] VisitorsList = new string[size];
     int LeaveTime;
     int ArrTime;
@@ -65,6 +54,8 @@ string[] GenList()
     return VisitorsList;
 }
 
+//Преобразование входного строкового массива в двумерный массив значений,
+//в котором 1 измерение - № события посещения, 2 измерение времена посещения[0] и ухода[1]
 string[,] StrToMass(string[] str)
 {
     string[] temp = new string[2];
@@ -80,9 +71,15 @@ string[,] StrToMass(string[] str)
     return result;
 }
 
+//Расчет наиболее посещаемого периода времени
 string[,] MostPeopleTime(string[] str)
 {
+    //разбиваем строковый массив на двумерный c помощью StrToMass
     string[,] strlist = StrToMass(str);
+
+    //Вводим массив счетчика часов посещения (индекс = час) и сканируем по
+    //нашему двумерному массиву.Если час попадает в диапазон 
+    //`посещение[0] - уход[1]`, прибавляем +1 к значению элемента
     int[] visitors = new int[24];
     for (int i = 0; i < str.Length; i++)
     {
@@ -95,6 +92,7 @@ string[,] MostPeopleTime(string[] str)
         }
     }
 
+    //Определяем самый ранний период максимального посещения и запоминаем его начало
     int IndexMax = 0;
     int max = visitors[IndexMax];
     for (int i = 1; i < visitors.Length; i++)
@@ -105,6 +103,8 @@ string[,] MostPeopleTime(string[] str)
             IndexMax = i;
         }
     }
+
+    //Формируем правильный формат ответа, начиная от самого раннего периода посещения
     string answer = String.Empty;
     for (int i = IndexMax; i < visitors.Length; i++)
     {
@@ -130,27 +130,15 @@ string[,] MostPeopleTime(string[] str)
                 }
             }
         }
-
     }
-    Console.WriteLine("\n" + String.Join(" ", visitors) + "\n");
     Console.WriteLine($"Периоды с наибольшим посещением:  " + answer);
+    //Console.WriteLine("\n" + String.Join(" ", visitors) + "\n");
+
+    //возвращения ответа в виде двумерного массива с помощью StrToMass
     string[,] result = StrToMass(answer.Split());
     return result;
 }
 
+
 string[] example = GenList();
 string[,] numbers = MostPeopleTime(example);
-
-
-
-
-//     int[] visitors = new int[24];
-//     result[0, 0] = IndexMax;
-//     for (int i = IndexMax + 1; i < visitors.Length; i++)
-//     {
-//         if ()
-// }
-
-//     return result
-// }
-

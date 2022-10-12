@@ -17,68 +17,104 @@
 Автор: Трофимов П.А.
 */
 
-//Одномерный случай:
-/*
-int[] GenArray()
+
+//Методы:
+
+//Метод для генерации двумерного массива из целых чисел
+int[,] GenArray(int Nrows, int Mcolumns, int Erange)
 {
-    Console.WriteLine("Создаем массив целых чисел."
-    + "\nСколько хотите элементов в массиве?"
-    + "\nВведите целое число: ");
-    int length = int.Parse(Console.ReadLine());
-    int [] array = new int[length];
-
-    Console.WriteLine("\nДо какого диапазона значения?");
-    int Numbs = int.Parse(Console.ReadLine());
-
-    for (int i = 0; i < array.Length; i++)
+    //Заполняем двумерный массив случайными значениями
+    int[,] result = new int[Nrows, Mcolumns];
+    for (int i = 0; i < Nrows; i++)
     {
-        array[i] = new Random().Next(0, Numbs + 1);
+        for (int j = 0; j < Mcolumns; j++)
+        {
+            result[i, j] = new Random().Next(0, Erange + 1);
+        }
     }
-    Console.WriteLine($"Сгенерированный массив: ");
-    for (int i = 0; i < array.Length; i++)
+
+    //Отображение сгенерированного двумерного массива
+    Console.WriteLine("Сгенерированный массив: ");
+    for (int i = 0; i < Nrows; i++)
     {
-        Console.Write("  "+ $"{array[i]}");
+        for (int j = 0; j < Mcolumns; j++)
+        {
+            Console.Write($"{result[i, j]} \t");
+        }
+        Console.WriteLine();
     }
-    return array;
+    return result;
 }
 
-int[] HowManyTimes(int[] array)
+
+//Метод для создания частотного словаря значений массива
+void FrequencyTable(int[,] array)
 {
-    int max = array[0];
-    for (int i = 1; i < array.Length; i++)
-    {
-        if (array[i] > max) max = array[i];
-    }
+    //Запоминаем общее кол-во элементов в массиве, чтобы получить процентное соотношение.
+    double Nelements = array.GetLength(0) * array.GetLength(1);
     
-    int[] AddArray = new int[max + 1];
-    for (int i = 0; i < AddArray.Length; i++)
+    //Считаем диапазон значений для поиска
+    int max = array[0, 0];
+    for (int i = 1; i < array.GetLength(0); i++)
     {
-        for (int j = 0; j < array.Length; j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            if(array[j] == i)
+            if (array[i, j] > max) max = array[i, j];
+        }
+    }
+
+    //Считаем количество одинаковых чисел внутри двумерного массива
+    double[] count = new double[max + 1];
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int k = 0; k < count.Length; k++)
             {
-                AddArray[i]++;
+                if (k == array[i, j])
+                {
+                    count[k]++;
+                }
             }
         }
     }
-    return AddArray;
-}
 
-void PrintResult(int[] array)
-{
+    //Вывод на экран частотной таблицы с учетом склонения.
     Console.WriteLine();
-    for (int i = 0; i < array.Length; i++)
-{
-    if(array[i] != 0) Console.WriteLine($"Количество {i} - {array[i]} раза;");
+    for (int i = 0; i < count.Length; i++)
+    {
+        bool condition1 = (count[i] % 10 == 2) || (count[i] % 10 == 3) || (count[i] % 10 == 4);
+        bool condition2 = (count[i] % 100 != 12) || (count[i] % 100 != 13) || (count[i] % 100 != 14);
+        if (count[i] != 0)
+        {
+            if (condition1 && condition2)
+            {
+                Console.WriteLine($"{i} встречается {count[i]} раза."
+                                + $"\tЧастота повторений: ({count[i] / Nelements:P1}) ");
+            }
+            else
+            {
+                Console.WriteLine($"{i} встречается {count[i]} раз."
+                                + $"\tЧастота повторений ({count[i] / Nelements:P1}) ");
+            }
+        }
+    }
 }
-}
 
 
-int[] array1 = GenArray();
+//Программа:
+Console.Clear();
 
-int[] array2 = HowManyTimes(array1);
+Console.WriteLine("Задаем двумерный массив."
+                + "Сколько строк в массиве? ");
+int rows = int.Parse(Console.ReadLine());
 
-PrintResult(array2);
+Console.WriteLine("\nСколько столбцов в массиве? ");
+int columns = int.Parse(Console.ReadLine());
 
-*/
+Console.WriteLine("\nДо какого диапазона значения?");
+int range = int.Parse(Console.ReadLine());
 
+int[,] array = GenArray(rows, columns, range);
+
+FrequencyTable(array);

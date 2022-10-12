@@ -22,5 +22,12 @@ int[] GenArray(int Nelements, int Arrange)
 }
 
 
-//Программа для вызова массива из  элементов:
-int [] ex = GenArray(Nelements: 8, Arrange: 50);
+//Программа для вызова массива из N элементов:
+
+Console.WriteLine("Введите количество элементов массива: ");
+int N = int.Parse(Console.ReadLine());
+
+Console.WriteLine("Введите диапазон значений: ");
+int R = int.Parse(Console.ReadLine());
+
+int [] ex = GenArray(Nelements: N, Arrange: R);

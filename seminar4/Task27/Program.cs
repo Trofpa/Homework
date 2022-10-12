@@ -18,7 +18,7 @@ int GetSum(int number)
     int result = 0;
     for (int i = 0; i < temp.Length; i++)
     {
-        result += int.Parse(temp[i].ToString());
+        result += int.Parse(temp[i].ToString);
     }
     return result;
 }
