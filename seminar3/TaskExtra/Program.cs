@@ -27,7 +27,7 @@ string[] GenList()
 {
     //Вводим количество строк
     Console.WriteLine("Создаем лист посещения."
-    + "\nВведите количество строк в списке: \n");
+                    + "\nВведите количество строк в списке: ");
     int size = int.Parse(Console.ReadLine());
 
     //Генерируем строковый массив с периодами времени.
@@ -38,16 +38,11 @@ string[] GenList()
     int ArrTime;
     for (int i = 0; i < VisitorsList.Length; i++)
     {
-
         ArrTime = new Random().Next(0, 24);
-        if (ArrTime == 23)
-        {
-            LeaveTime = 0;
-        }
-        else
-        {
-            LeaveTime = new Random().Next(ArrTime + 1, 24);
-        }
+
+        if (ArrTime == 23) LeaveTime = 0;
+        else LeaveTime = new Random().Next(ArrTime + 1, 24);
+
         VisitorsList[i] = $"{ArrTime}-{LeaveTime}";
     }
     Console.WriteLine(" Сформированный список:\n{0}", String.Join("; ", VisitorsList));
@@ -108,37 +103,25 @@ string[,] MostPeopleTime(string[] str)
     string answer = String.Empty;
     for (int i = IndexMax; i < visitors.Length; i++)
     {
-        if ((i == visitors.Length - 1) && (visitors[i] == max))
-        {
-            answer += $"0;";
-        }
+        if ((i == visitors.Length - 1) && (visitors[i] == max)) answer += $"0; ";
         else
         {
-            if ((visitors[i] != max) && (visitors[i - 1] == max))
-            {
-                answer += $"{i};";
-            }
+            if ((visitors[i] != max) && (visitors[i - 1] == max)) answer += $"{i}; ";
             else
             {
-                if ((visitors[i - 1] != max) && (visitors[i] == max))
-                {
-                    answer += $"{i}-";
-                }
-                else
-                {
-                    continue;
-                }
+                if ((visitors[i - 1] != max) && (visitors[i] == max)) answer += $"{i}-";
+                else continue;
             }
         }
     }
     Console.WriteLine($"Периоды с наибольшим посещением:  " + answer);
-    //Console.WriteLine("\n" + String.Join(" ", visitors) + "\n");
+    Console.WriteLine("\n" + String.Join(" ", visitors) + "\n");
 
     //возвращения ответа в виде двумерного массива с помощью StrToMass
     string[,] result = StrToMass(answer.Split());
     return result;
 }
 
-
+//Программа
 string[] example = GenList();
 string[,] numbers = MostPeopleTime(example);
