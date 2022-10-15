@@ -103,7 +103,7 @@ string[,] MostPeopleTime(string[] str)
     string answer = String.Empty;
     for (int i = IndexMax; i < visitors.Length; i++)
     {
-        if ((i == visitors.Length - 1) && (visitors[i] == max)) answer += $"0; ";
+        if ((i == visitors.Length - 1) && (visitors[i] == max)) answer += $"23-0; ";
         else
         {
             if ((visitors[i] != max) && (visitors[i - 1] == max)) answer += $"{i}; ";
@@ -124,4 +124,5 @@ string[,] MostPeopleTime(string[] str)
 
 //Программа
 string[] example = GenList();
+
 string[,] numbers = MostPeopleTime(example);
