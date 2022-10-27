@@ -77,6 +77,6 @@ int MinRow(int[,] array)
 
 //Программа
 int[,] matrix = new int[3,2];
-matrix = FillArray(matrix, 0, 50);
+matrix = FillArray(matrix, 0, 9);
 PrintArray(matrix);
 Console.WriteLine($"Ответ: {MinRow(matrix)} строка.");
